@@ -1,4 +1,4 @@
-package omq.my;
+package omq.my.share;
 
 import java.sql.SQLException;
 import java.util.Date;

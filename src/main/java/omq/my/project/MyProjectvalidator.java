@@ -1,9 +1,9 @@
-package omq.my;
+package omq.my.project;
 
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
-public class MyShareValidator extends Validator{
+public class MyProjectvalidator extends Validator{
 
 	protected void validate(Controller c) {
 		validateRequiredString("share.title", "msg", "请输标题!");
@@ -16,5 +16,4 @@ public class MyShareValidator extends Validator{
 	protected void handleError(Controller c) {
 		c.renderJson();
 	}
-
 }
