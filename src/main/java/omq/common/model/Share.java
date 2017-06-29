@@ -8,4 +8,6 @@ import omq.common.model.base.BaseShare;
 @SuppressWarnings("serial")
 public class Share extends BaseShare<Share> {
 	
+	public static final int REPORT_BLOCK_NUM = 3;
+	
 }

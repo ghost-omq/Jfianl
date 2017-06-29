@@ -8,4 +8,6 @@ import omq.common.model.base.BaseFeedback;
 @SuppressWarnings("serial")
 public class Feedback extends BaseFeedback<Feedback> {
 	
+	public static final int REPORT_BLOCK_NUM = 3;
+	
 }

@@ -1,5 +1,6 @@
 package omq.common.model;
 
+
 import omq.common.model.base.BaseAccount;
 
 /**
@@ -8,4 +9,22 @@ import omq.common.model.base.BaseAccount;
 @SuppressWarnings("serial")
 public class Account extends BaseAccount<Account> {
 	
+	public static final String AVATAR_NO_AVATAR = "x.jpg";
+
+	public static final int STATUS_LOCK_ID = -1;
+	public static final int STATUS_REG = 0;
+	public static final int STATUS_OK = 1;
+	
+	public boolean isStatusReg(){
+	return getStatus() == STATUS_REG;
+	}
+
+	public boolean isStatusLockId() {
+		return getStatus() == STATUS_LOCK_ID;
+	}
+	
+	public Account removeSensitiveInfo() {
+		remove("password", "salt");
+		return this;
+	}
 }

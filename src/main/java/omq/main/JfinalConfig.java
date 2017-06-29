@@ -10,6 +10,7 @@ import com.jfinal.config.Plugins;
 import com.jfinal.config.Routes;
 import com.jfinal.core.JFinal;
 import com.jfinal.json.MixedJsonFactory;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.Prop;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -28,6 +29,8 @@ public class JfinalConfig extends JFinalConfig{
 		JFinal.start("src/main/webapp", 8080, "/", 5);
 	}
 	
+	
+	
 	private static Prop loadConfig() {
 		try {
 			return PropKit.use("jfinal_club_config_pro.txt");
@@ -45,6 +48,7 @@ public class JfinalConfig extends JFinalConfig{
 	public void configRoute(Routes me) {
 		me.add(new ConfigRoute());
 	}
+	
 
 	public void configEngine(Engine me) {
 		me.setDevMode(p.getBoolean("engineDevMode", false));
@@ -68,6 +72,8 @@ public class JfinalConfig extends JFinalConfig{
 	    
 	    ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
 	    MappingKit.mapping(arp);
+	    arp.setBaseSqlTemplatePath(PathKit.getRootClassPath() + "/sql");
+        arp.addSqlTemplate("all_sqls.sql");
 	    me.add(arp);
 	}
 
