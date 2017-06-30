@@ -8,4 +8,39 @@ import omq.common.model.base.BaseAuthCode;
 @SuppressWarnings("serial")
 public class AuthCode extends BaseAuthCode<AuthCode> {
 	
+	public static final int TYPE_REG_ACTIVATE = 0;
+	public static final int TYPE_RETRIEVE_PASSWORD = 1;
+	
+	public boolean save(){
+		int type = getType();
+		if(type < TYPE_REG_ACTIVATE || type > TYPE_RETRIEVE_PASSWORD){
+			throw new RuntimeException("授权码类型不正确: " + type);
+		}
+		return super.save();
+	}
+	
+	public boolean update(){
+		throw new RuntimeException("授权码不支持更新操作");
+	}
+	
+	public boolean isValidRegActivateAuthCode() {
+		return notExpired() && isTypeRegActivate();
+	}
+	public boolean isValidRetrievePasswordAuthCode() {
+		return notExpired() && isTypeRetrievePassword();
+	}
+	public boolean isTypeRegActivate() {
+		return getType() == TYPE_REG_ACTIVATE;
+	}
+	public boolean isTypeRetrievePassword() {
+		return getType() == TYPE_RETRIEVE_PASSWORD;
+	}
+	public boolean isExpired() {
+		return getExpireAt() < System.currentTimeMillis();
+	}
+	public boolean notExpired() {
+		return ! isExpired();
+	}
+	
+	
 }

@@ -18,20 +18,35 @@ public class IndexService {
 	private Feedback feedbackDao = new Feedback().dao();
 	
 	public List<Project> getProjectList() {
+		/*
 		SqlPara sqlPara = projectDao.getSqlPara("index.getProjectList", Project.REPORT_BLOCK_NUM);
 		List<Project> projectList =  projectDao.findByCache(indexCacheName, "projectList", sqlPara.getSql(), sqlPara.getPara());
+		return projectList;
+		*/
+		SqlPara sqlPara = projectDao.getSqlPara("index.getProjectList", Project.REPORT_BLOCK_NUM);
+		List<Project> projectList = projectDao.find(sqlPara);
 		return projectList;
 	}
 
 	public List<Share> getShareList() {
+		/*
 		SqlPara sqlPara = shareDao.getSqlPara("index.getShareList", Share.REPORT_BLOCK_NUM);
 		List<Share> shareList = shareDao.findByCache(indexCacheName, "shareList", sqlPara.getSql(), sqlPara.getPara());
 		return shareList;
+		*/
+		SqlPara sqlPara = shareDao.getSqlPara("index.getShareList", Share.REPORT_BLOCK_NUM);
+		List<Share> shareProject = shareDao.find(sqlPara);
+		return shareProject;
 	}
 
 	public List<Feedback> getFeedbackList() {
+		/*
 		SqlPara sqlPara = feedbackDao.getSqlPara("index.getFeedbackList", Feedback.REPORT_BLOCK_NUM);
 		List<Feedback> feedbackList = feedbackDao.findByCache(indexCacheName, "feedbackList", sqlPara.getSql(), sqlPara.getPara());
+		return feedbackList;
+		*/
+		SqlPara sqlPara = feedbackDao.getSqlPara("index.getFeedbackList", Feedback.REPORT_BLOCK_NUM);
+		List<Feedback> feedbackList = feedbackDao.find(sqlPara);
 		return feedbackList;
 	}
 

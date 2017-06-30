@@ -3,10 +3,13 @@ package omq.reg;
 import java.util.Date;
 
 import com.jfinal.kit.HashKit;
+import com.jfinal.kit.PropKit;
 import com.jfinal.kit.Ret;
 import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 
+import omq.common.authcode.AuthCodeService;
+import omq.common.kit.EmailKit;
 import omq.common.model.Account;
 
 public class RegService {
@@ -47,10 +50,54 @@ public class RegService {
 		account.setIp(ip);
 		account.setAvatar(Account.AVATAR_NO_AVATAR);
 		
-		if(account.save()){
-			return Ret.ok("msg", "注册成功，激活邮件已发送，请查收并激活账号：" + userName);
+		if (account.save()) {
+			String authCode =  AuthCodeService.me.createRegActivateAuthCode(account.getInt("id"));
+			if (sendRegActivateAuthEmail(authCode, account)) {
+				return Ret.ok("msg", "注册成功，激活邮件已发送，请查收并激活账号：" + userName);
+			} else {
+				return Ret.fail("msg", "注册成功，但是激活邮件发送失败");
+			}
 		} else {
-			return Ret.fail("msg", "注册失败，account 保存失败，请告知管理员");
+			return Ret.fail("msg", "注册失败，account 保存失败");
+		}
+	}
+	
+	private boolean sendRegActivateAuthEmail(String authCode, Account reg) {
+		String title = "Jfinal 会员激活邮件";
+		String content = "在浏览器地址栏里输入并访问下面激活链接即可完成账户激活：\n\n"
+				+ " http://www.jfinal.com/reg/activate?authCode="
+				+ authCode;
+		
+		String emailService = PropKit.get("emailService");
+		String fromEmail = PropKit.get("fromEmail");
+		String emailPass = PropKit.get("emailPass");
+		String toEmail = reg.getStr("userName");
+		
+		try{
+			EmailKit.sendEmail(emailService, fromEmail, emailPass, toEmail,title,content);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+	
+	public Ret reSendActivateEmail(String userName){
+		if(StrKit.isBlank(userName)){
+			Ret.fail("msg","不能为空");
+		}
+		if(! isUserNameExists(userName)){
+			Ret.fail("msg","邮箱没有被注册，无法获取激活邮件");
+		}
+		
+		Account account = dao.findFirst("select * from account where userName=? and status=?",userName,Account.STATUS_REG);
+		if(account == null){
+			Ret.fail("msg", "邮箱已被激活,可以直接登录");
+		}
+		String authCode = AuthCodeService.me.createRegActivateAuthCode(account.getId());
+		if(sendRegActivateAuthEmail(authCode,account)){
+			return Ret.ok("msg","激活邮箱已经发送");
+		}else{
+			return Ret.fail("msg","激活失败");
 		}
 	}
 

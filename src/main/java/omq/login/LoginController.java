@@ -1,8 +1,10 @@
 package omq.login;
 
-import com.jfinal.club.common.kit.IpKit;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
+
+import omq.common.kit.IpKit;
 
 public class LoginController extends Controller{
 
@@ -13,6 +15,7 @@ public class LoginController extends Controller{
 		render("index.html");
 	}
 	
+	@Before(LoginValidator.class)
 	public void doLogin(){
 		boolean keepLogin = getParaToBoolean("keepLogin", false);
 		String loginIp = IpKit.getRealIp(getRequest());

@@ -50,7 +50,7 @@ public class LoginService {
 
 		loginAccount.removeSensitiveInfo();
 		loginAccount.put("sessionId", sessionId);
-		CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+		//CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
 
 		createLoginLog(loginAccount.getId(), loginIp);
 

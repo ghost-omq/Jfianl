@@ -15,7 +15,7 @@ public class ConfigRoute extends Routes{
 	public void config() {
 		setBaseViewPath("/view");
 		
-		add("/",IndexController.class);
+		add("/",IndexController.class,"/index");
 		add("/my/share",MyShareController.class);
 		add("/my/feedback",MyFeedbackController.class);
 		add("/my/project",MyProjectController.class);

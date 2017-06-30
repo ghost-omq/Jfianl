@@ -25,6 +25,15 @@ public class RegController extends Controller{
 		renderJson(reg);
 	}
 	
+	public void notActivated() {
+		render("not_activated.html");
+	}
+	
+	public void reSendActivateEmail(){
+		Ret ret = srv.reSendActivateEmail(getPara("email"));
+		renderJson(ret);
+	}
+	
 	
 	public void captcha() {
 		renderCaptcha();
