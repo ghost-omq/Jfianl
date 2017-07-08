@@ -7,6 +7,7 @@ import omq.login.LoginController;
 import omq.my.favorite.FavoriteController;
 import omq.my.feedback.MyFeedbackController;
 import omq.my.project.MyProjectController;
+import omq.my.setting.MySettingController;
 import omq.my.share.MyShareController;
 import omq.reg.RegController;
 
@@ -20,6 +21,8 @@ public class ConfigRoute extends Routes{
 		add("/my/feedback",MyFeedbackController.class);
 		add("/my/project",MyProjectController.class);
 		add("/my/favorite",FavoriteController.class);
+		add("/my/setting", MySettingController.class);
+		//add("/my/setting/password", MySettingController.class);
 		add("/reg",RegController.class);
 		add("/login",LoginController.class);
 	}

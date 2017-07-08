@@ -7,5 +7,15 @@ import omq.common.model.base.BaseSession;
  */
 @SuppressWarnings("serial")
 public class Session extends BaseSession<Session> {
+
+	private static final long serialVersionUID = 1L;
+	public static final Session dao = new Session().dao();
 	
+	public boolean isExpired() {
+		return getExpireAt() < System.currentTimeMillis();
+	}
+
+	public boolean notExpired() {
+		return ! isExpired();
+	}
 }

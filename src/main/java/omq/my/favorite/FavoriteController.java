@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.jfinal.core.Controller;
 
+import omq.common.controller.BaseController;
 import omq.common.model.Favorite;
 
-public class FavoriteController extends Controller{
+public class FavoriteController extends BaseController{
 	
 	static FavoriteService srv = FavoriteService.me;
 

@@ -15,8 +15,12 @@ public class Account extends BaseAccount<Account> {
 	public static final int STATUS_REG = 0;
 	public static final int STATUS_OK = 1;
 	
+	public boolean isStatusOk(){
+		return getStatus() == STATUS_OK;
+	}
+	
 	public boolean isStatusReg(){
-	return getStatus() == STATUS_REG;
+		return getStatus() == STATUS_REG;
 	}
 
 	public boolean isStatusLockId() {

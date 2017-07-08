@@ -17,7 +17,7 @@ public class LoginService {
 	public static final String loginAccountCacheName = "loginAccount";
 	public static final String sessionIdName = "jfinalId";
 	
-	static final LoginService me = new LoginService();
+	public static final LoginService me = new LoginService();
 	private final Account dao = new Account().dao();
 	
 	public Ret login(String userName, String password, boolean keepLogin, String loginIp){
@@ -50,7 +50,7 @@ public class LoginService {
 
 		loginAccount.removeSensitiveInfo();
 		loginAccount.put("sessionId", sessionId);
-		//CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+		CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
 
 		createLoginLog(loginAccount.getId(), loginIp);
 
@@ -63,4 +63,37 @@ public class LoginService {
 		Db.save("login_log", loginLog);
 	}
 
+	public void reloadLoginAccount(Account loginAccountOld) {
+		String sessionId = loginAccountOld.get("sessionId");
+		Account loginAccount = dao.findFirst("select * from account where id=? limit 1", loginAccountOld.getId());
+		loginAccount.removeSensitiveInfo();
+		loginAccount.put("sessionId", sessionId);
+		CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+	}
+	
+	public Account getLoginAccountWithSessionId(String sessionId) {
+		return CacheKit.get(loginAccountCacheName, sessionId);
+	}
+	
+	public Account loginWithSessionId(String sessionId, String loginIp) {
+		Session session = Session.dao.findById(sessionId);
+		if (session == null) {
+			return null;
+		}
+		if (session.isExpired()) {
+			session.delete();
+			return null;
+		}
+
+		Account loginAccount = dao.findById(session.getAccountId());
+		if (loginAccount != null && loginAccount.isStatusOk()) {
+			loginAccount.removeSensitiveInfo();                                 // 移除 password 与 salt 属性值
+			loginAccount.put("sessionId", sessionId);                          // 保存一份 sessionId 到 loginAccount 备用
+			CacheKit.put(loginAccountCacheName, sessionId, loginAccount);
+
+			createLoginLog(loginAccount.getId(), loginIp);
+			return loginAccount;
+		}
+		return null;
+	}
 }

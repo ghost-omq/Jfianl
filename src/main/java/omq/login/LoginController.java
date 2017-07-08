@@ -4,9 +4,10 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 
+import omq.common.controller.BaseController;
 import omq.common.kit.IpKit;
 
-public class LoginController extends Controller{
+public class LoginController extends BaseController{
 
 	static final LoginService srv = new LoginService().me;
 	

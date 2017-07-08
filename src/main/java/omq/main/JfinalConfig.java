@@ -18,6 +18,7 @@ import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 
+import omq.common.interceptor.LoginSessionInterceptor;
 import omq.helloTest.HelloJfinal;
 
 public class JfinalConfig extends JFinalConfig{
@@ -78,7 +79,7 @@ public class JfinalConfig extends JFinalConfig{
 	}
 
 	public void configInterceptor(Interceptors me) {
-		
+		me.add(new LoginSessionInterceptor());
 	}
 
 	public void configHandler(Handlers me) {
