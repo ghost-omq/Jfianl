@@ -3,16 +3,16 @@ package omq.my.project;
 import java.util.List;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
 
+import omq.common.controller.BaseController;
 import omq.common.model.Project;
 
-public class MyProjectController extends Controller{
+public class MyProjectController extends BaseController{
 	
 	static final MyProjectService srv = new MyProjectService().me;
 
 	public void index(){
-		List<Project> projectList = srv.findAll(1);
+		List<Project> projectList = srv.findAll(getLoginAccountId());
 		setAttr("projectList", projectList);
 		render("index.html");
 	}
@@ -21,26 +21,26 @@ public class MyProjectController extends Controller{
 		render("add.html");
 	}
 	
-	@Before(MyProjectvalidator.class)
+	@Before(MyProjectValidator.class)
 	public void save(){
-		srv.save(1, getModel(Project.class));
+		srv.save(getLoginAccountId(), getModel(Project.class));
 		renderJson("isOk",true);
 	}
 	
 	public void edit(){
-		Project projectId = srv.findById(1, getParaToInt("id"));
+		Project projectId = srv.findById(getLoginAccountId(), getParaToInt("id"));
 		setAttr("project", projectId);
 		render("edit.html");
 	}
 	
-	@Before(MyProjectvalidator.class)
+	@Before(MyProjectValidator.class)
 	public void update(){
-		srv.update(1, getModel(Project.class));
+		srv.update(getLoginAccountId(), getModel(Project.class));
 		renderJson("isOk",true);
 	}
 	
 	public void delete(){
-		srv.delete(1, getParaToInt("id"));
+		srv.delete(getLoginAccountId(), getParaToInt("id"));
 		redirect("/my/project");
 	}
 }

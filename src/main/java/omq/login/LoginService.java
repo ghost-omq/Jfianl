@@ -58,6 +58,14 @@ public class LoginService {
 						.set(loginAccountCacheName, loginAccount)
 						.set("maxAgeInSeconds", maxAgeInSeconds);
 	}
+	
+	public void logout(String sessionId){
+		if(sessionId != null){
+			CacheKit.remove(loginAccountCacheName, sessionId);
+			Session.dao.deleteById(sessionId);
+		}
+	}
+	
 	private void createLoginLog(Integer accountId, String loginIp) {
 		Record loginLog = new Record().set("accountId", accountId).set("ip", loginIp).set("loginAt", new Date());
 		Db.save("login_log", loginLog);

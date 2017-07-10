@@ -1,12 +1,12 @@
 package omq.reg;
 
 import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 
+import omq.common.controller.BaseController;
 import omq.common.kit.IpKit;
 
-public class RegController extends Controller{
+public class RegController extends BaseController{
 	
 	static final RegService srv = new RegService().me;
 

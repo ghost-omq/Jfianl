@@ -3,7 +3,7 @@ package omq.my.project;
 import com.jfinal.core.Controller;
 import com.jfinal.validate.Validator;
 
-public class MyProjectvalidator extends Validator{
+public class MyProjectValidator extends Validator{
 
 	protected void validate(Controller c) {
 		validateRequiredString("share.title", "msg", "请输标题!");

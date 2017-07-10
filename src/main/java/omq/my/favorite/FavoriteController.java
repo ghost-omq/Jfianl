@@ -12,13 +12,13 @@ public class FavoriteController extends BaseController{
 	static FavoriteService srv = FavoriteService.me;
 
 	public void index(){
-		List<Favorite> favoriteList = srv.findAll(1);
+		List<Favorite> favoriteList = srv.findAll(getLoginAccountId());
         setAttr("favoriteList", favoriteList);
         render("index.html");
 	}
 	
 	public void delete() {
-        srv.deleteByFavoriteId(1, getParaToInt("id"));
+        srv.deleteByFavoriteId(getLoginAccountId(), getParaToInt("id"));
         redirect("/my/favorite");
     }
 }

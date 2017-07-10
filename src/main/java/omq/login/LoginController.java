@@ -1,6 +1,8 @@
 package omq.login;
 
 import com.jfinal.aop.Before;
+import com.jfinal.aop.Clear;
+import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 
@@ -30,6 +32,14 @@ public class LoginController extends BaseController{
 			ret.set("returnUrl", getPara("returnUrl", "/"));
 		}
 		renderJson(ret);
+	}
+	
+	@Clear
+	@ActionKey("/logout")
+	public void logout(){
+		srv.logout(LoginService.sessionIdName);
+		removeCookie(LoginService.sessionIdName);
+		redirect("/");
 	}
 	
 	public void captcha() {

@@ -16,6 +16,7 @@ import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.cron4j.Cron4jPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 
 import omq.common.interceptor.LoginSessionInterceptor;
@@ -76,6 +77,8 @@ public class JfinalConfig extends JFinalConfig{
 	    arp.setBaseSqlTemplatePath(PathKit.getRootClassPath() + "/sql");
         arp.addSqlTemplate("all_sqls.sql");
 	    me.add(arp);
+	    
+	    me.add(new EhCachePlugin());
 	}
 
 	public void configInterceptor(Interceptors me) {

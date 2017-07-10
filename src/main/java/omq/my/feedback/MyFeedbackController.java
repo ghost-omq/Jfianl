@@ -5,14 +5,15 @@ import java.util.List;
 import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 
+import omq.common.controller.BaseController;
 import omq.common.model.Feedback;
 
-public class MyFeedbackController extends Controller{
+public class MyFeedbackController extends BaseController{
 	
 	static final MyFeedbackService srv = new MyFeedbackService().me;
 
 	public void index(){
-		List<Feedback> feedback = srv.findAll(1);
+		List<Feedback> feedback = srv.findAll(getLoginAccountId());
 		setAttr("feedbackList", feedback);
 		render("index.html");
 	}
@@ -23,7 +24,7 @@ public class MyFeedbackController extends Controller{
 	
 	@Before(MyFeedbackValidator.class)
 	public void save(){
-		srv.save(1,getModel(Feedback.class));
+		srv.save(getLoginAccountId(),getModel(Feedback.class));
 		renderJson("isOk",true);
 	}
 	
