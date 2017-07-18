@@ -1,6 +1,5 @@
 package omq.my.newsfeed;
 
-import com.jfinal.core.ActionKey;
 import com.jfinal.plugin.activerecord.Page;
 
 import omq.common.controller.BaseController;
@@ -10,11 +9,18 @@ public class NewsFeedController extends BaseController{
 	
 	static NewsFeedService srv = NewsFeedService.me;
 
-	@ActionKey("/my")
+	//@ActionKey("/my")
 	public void newsFeed() {
 		Page<NewsFeed> newsFeedPage = srv.paginate(getLoginAccountId(), getParaToInt("p", 1));
 		setAttr("newsFeedPage", newsFeedPage);
-		setAttr("paginateLink", "/my?p=");                  // 用于指定重用页面分页宏所使用的 link
+		setAttr("paginateLink", "/my?p=");
+		render("index.html");
+	}
+	
+	public void referMe() {
+		Page<NewsFeed> newsFeedPage = ReferMeService.me.paginate(getLoginAccountId(), getParaToInt("p", 1));
+		setAttr("newsFeedPage", newsFeedPage);
+		setAttr("paginateLink", "/my/referMe?p=");
 		render("index.html");
 	}
 }

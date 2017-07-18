@@ -7,5 +7,7 @@ import omq.common.model.base.BaseRemind;
  */
 @SuppressWarnings("serial")
 public class Remind extends BaseRemind<Remind> {
-	
+	public static final int TYPE_REFER_ME = 0;
+    public static final int TYPE_MESSAGE = 1;
+    public static final int TYPE_FANS = 2;  
 }

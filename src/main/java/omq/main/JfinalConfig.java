@@ -19,6 +19,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.template.Engine;
 
+import omq.common.handler.UrlSeoHandler;
 import omq.common.interceptor.LoginSessionInterceptor;
 import omq.helloTest.HelloJfinal;
 
@@ -38,6 +39,7 @@ public class JfinalConfig extends JFinalConfig{
 			return PropKit.use("jfinal_club_config_pro.txt");
 		} catch (Exception e) {
 			return PropKit.use("jfinal_club_config_dev.txt");
+			
 		}
 	}
 	
@@ -86,7 +88,7 @@ public class JfinalConfig extends JFinalConfig{
 	}
 
 	public void configHandler(Handlers me) {
-		
+		me.add(new UrlSeoHandler());
 	}
 
 }
