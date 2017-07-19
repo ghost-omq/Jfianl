@@ -6,7 +6,9 @@ import com.jfinal.aop.Before;
 
 import omq.common.controller.BaseController;
 import omq.common.model.Project;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class MyProjectController extends BaseController{
 	
 	static final MyProjectService srv = new MyProjectService().me;

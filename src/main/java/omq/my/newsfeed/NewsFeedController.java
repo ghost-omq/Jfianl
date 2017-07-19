@@ -1,10 +1,13 @@
 package omq.my.newsfeed;
 
+import com.jfinal.aop.Before;
 import com.jfinal.plugin.activerecord.Page;
 
 import omq.common.controller.BaseController;
 import omq.common.model.NewsFeed;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class NewsFeedController extends BaseController{
 	
 	static NewsFeedService srv = NewsFeedService.me;

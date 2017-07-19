@@ -2,10 +2,9 @@ package omq.share;
 
 import com.jfinal.aop.Before;
 
-import omq.common.contrller.BaseController;
+import omq.common.controller.BaseController;
 import omq.common.model.Share;
 import omq.common.pageView.PageViewInterceptor;
-import omq.project.ProjectService;
 
 public class ShareController extends BaseController{
 

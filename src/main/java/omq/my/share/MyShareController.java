@@ -6,7 +6,9 @@ import com.jfinal.aop.Before;
 
 import omq.common.controller.BaseController;
 import omq.common.model.Share;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class MyShareController extends BaseController{
 	
 	static final MyShareService srv = new MyShareService().me;

@@ -2,7 +2,7 @@ package omq.project;
 
 import com.jfinal.aop.Before;
 
-import omq.common.contrller.BaseController;
+import omq.common.controller.BaseController;
 import omq.common.model.Project;
 import omq.common.pageView.PageViewInterceptor;
 

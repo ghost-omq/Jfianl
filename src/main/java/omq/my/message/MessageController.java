@@ -1,11 +1,14 @@
 package omq.my.message;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.ActionKey;
 import com.jfinal.plugin.activerecord.Page;
 
-import omq.common.contrller.BaseController;
+import omq.common.controller.BaseController;
 import omq.common.model.Message;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class MessageController extends BaseController{
 	
 	MessageService srv = MessageService.me;

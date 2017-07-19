@@ -1,12 +1,15 @@
 package omq.my.setting;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.jfinal.upload.UploadFile;
 import omq.common.controller.BaseController;
 import omq.common.model.Account;
 import omq.login.LoginService;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class MySettingController extends BaseController{
 	
 	public static final MySettingService srv = new MySettingService().me;
@@ -52,7 +55,7 @@ public class MySettingController extends BaseController{
 		renderJson(ret);
 	}
 	
-	public void index() {
+	public void password() {
 		render("password.html");
 	}
 	

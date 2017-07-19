@@ -7,7 +7,9 @@ import com.jfinal.core.Controller;
 
 import omq.common.controller.BaseController;
 import omq.common.model.Feedback;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class MyFeedbackController extends BaseController{
 	
 	static final MyFeedbackService srv = new MyFeedbackService().me;

@@ -16,7 +16,7 @@ package omq.feedback;
 
 import com.jfinal.aop.Before;
 
-import omq.common.contrller.BaseController;
+import omq.common.controller.BaseController;
 import omq.common.model.Feedback;
 import omq.common.pageView.PageViewInterceptor;
 

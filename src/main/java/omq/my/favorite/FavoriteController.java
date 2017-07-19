@@ -2,11 +2,14 @@ package omq.my.favorite;
 
 import java.util.List;
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 
 import omq.common.controller.BaseController;
 import omq.common.model.Favorite;
+import omq.my.like.LikeInterceptor;
 
+@Before({LikeInterceptor.class})
 public class FavoriteController extends BaseController{
 	
 	static FavoriteService srv = FavoriteService.me;
