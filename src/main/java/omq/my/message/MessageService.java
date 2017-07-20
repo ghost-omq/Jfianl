@@ -1,5 +1,6 @@
 package omq.my.message;
 
+import com.jfinal.kit.Ret;
 import com.jfinal.plugin.activerecord.Page;
 
 import omq.common.account.AccountService;
@@ -18,6 +19,10 @@ public class MessageService {
         Page<Message> messagePage = dao.paginate(pageNum, pageSize, select, from, accountId);
         AccountService.me.join("friend", messagePage.getList(), "nickName", "avatar");
         return messagePage;
+    }
+    
+    public Ret sendSystemMessage(int sender, int receiver, String content) {
+        return send(sender, receiver, Message.TYPE_SYSTEM, content);
     }
 
 }

@@ -8,4 +8,7 @@ import omq.common.model.base.BaseMessage;
 @SuppressWarnings("serial")
 public class Message extends BaseMessage<Message> {
 	
+	public static final int TYPE_NORMAL = 0;
+    public static final int TYPE_SYSTEM = 1;  
+	
 }

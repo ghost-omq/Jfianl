@@ -5,10 +5,12 @@ import java.util.List;
 import com.jfinal.aop.Before;
 
 import omq.common.controller.BaseController;
+import omq.common.interceptor.FrontAuthInterceptor;
 import omq.common.model.Project;
+import omq.my.friend.FriendInterceptor;
 import omq.my.like.LikeInterceptor;
 
-@Before({LikeInterceptor.class})
+@Before({LikeInterceptor.class,FriendInterceptor.class,FrontAuthInterceptor.class})
 public class MyProjectController extends BaseController{
 	
 	static final MyProjectService srv = new MyProjectService().me;

@@ -2,6 +2,7 @@ package omq.common.account;
 
 import java.util.List;
 
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.ehcache.CacheKit;
 
@@ -43,11 +44,8 @@ public class AccountService {
 	}
 	
 	public Account getById(int accountId) {
-        // 优先从缓存中取，未命中缓存则从数据库取
         Account account = CacheKit.get(allAccountsCacheName, accountId);
         if (account == null) {
-            // 考虑到可能需要 join 状态不合法的用户，先放开 status 的判断
-            // account = dao.findFirst("select * from account where id=? and status=? limit 1", accountId, Account.STATUS_OK);
             account = dao.findFirst("select * from account where id=? limit 1", accountId);
             if (account != null) {
                 account.removeSensitiveInfo();
@@ -55,6 +53,27 @@ public class AccountService {
             }
         }
         return account;
+    }
+	
+	private void updateLikeCount(int accountId, boolean isAdd) {
+        String sql = isAdd ?
+                "update account set likeCount=likeCount+1 where id=? limit 1" :
+                "update account set likeCount=likeCount-1 where id=? and likeCount > 0 limit 1";
+        int n = Db.update(sql, accountId);
+        if (n > 0) {
+            Account account = CacheKit.get(allAccountsCacheName, accountId);
+            if (account != null) {
+                account.setLikeCount(account.getLikeCount() + (isAdd ? 1 : -1));
+            }
+        }
+    }
+	
+	public void addLikeCount(int accountId) {
+        updateLikeCount(accountId, true);
+    }
+
+    public void minusLikeCount(int accountId) {
+        updateLikeCount(accountId, false);
     }
 
 }

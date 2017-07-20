@@ -6,10 +6,12 @@ import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 
 import omq.common.controller.BaseController;
+import omq.common.interceptor.FrontAuthInterceptor;
 import omq.common.model.Favorite;
+import omq.my.friend.FriendInterceptor;
 import omq.my.like.LikeInterceptor;
 
-@Before({LikeInterceptor.class})
+@Before({LikeInterceptor.class,FriendInterceptor.class,FrontAuthInterceptor.class})
 public class FavoriteController extends BaseController{
 	
 	static FavoriteService srv = FavoriteService.me;

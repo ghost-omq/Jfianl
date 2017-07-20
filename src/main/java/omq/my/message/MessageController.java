@@ -5,10 +5,12 @@ import com.jfinal.core.ActionKey;
 import com.jfinal.plugin.activerecord.Page;
 
 import omq.common.controller.BaseController;
+import omq.common.interceptor.FrontAuthInterceptor;
 import omq.common.model.Message;
+import omq.my.friend.FriendInterceptor;
 import omq.my.like.LikeInterceptor;
 
-@Before({LikeInterceptor.class})
+@Before({LikeInterceptor.class,FriendInterceptor.class,FrontAuthInterceptor.class})
 public class MessageController extends BaseController{
 	
 	MessageService srv = MessageService.me;

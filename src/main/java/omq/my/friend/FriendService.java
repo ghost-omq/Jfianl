@@ -1,6 +1,10 @@
 package omq.my.friend;
 
+import java.util.List;
+
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
 
 import omq.common.model.Account;
 
@@ -29,4 +33,36 @@ public class FriendService {
 		from.append(") as t left join friend f2 on t.accountId = f2.friendId and f2.accountId = ?");
 		return accountDao.paginate(pageNum, pageSize, select, from.toString(), accountId, accountId);
 	}
+	
+	public int getFriendRelation(int accountId, int friendId) {
+		if (accountId == friendId) {
+			return -1;                  // accountId 与 friendId 相同
+		}
+
+		List<Record> list = Db.find(
+				"select accountId, friendId from friend where accountId= ? and friendId= ? union all " +
+				"select accountId, friendId from friend where accountId= ? and friendId= ?",
+				accountId, friendId, friendId, accountId);
+		if (list.size() == 0) {
+			return 0;                   // 两个账号无任何关系
+		}
+		if (list.size() == 1) {
+			if (list.get(0).getInt("accountId") == accountId) {
+				return 1;               // accountId 关注了 friendId
+			} else {
+				return 2;               // friendId 关注了 accountId
+			}
+		}
+		if (list.size() == 2) {
+			return 3;                   // accountId 与 friendId 互相关注
+		}
+		throw new RuntimeException("不可能存在的第五种关系，正常情况下该异常永远不可能抛出");
+	}
+	
+	public int[] getFollowAndFansCount(int accountId) {
+        String sql = "select count(*) from friend f1 where accountId = ? union all " +
+                     "select count(*) from friend f2 where friendId = ? ";
+        List<Long> list = Db.query(sql, accountId, accountId);
+        return new int[]{list.get(0).intValue(), list.get(1).intValue()};
+    }
 }

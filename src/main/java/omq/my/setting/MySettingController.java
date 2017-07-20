@@ -5,11 +5,13 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.Ret;
 import com.jfinal.upload.UploadFile;
 import omq.common.controller.BaseController;
+import omq.common.interceptor.FrontAuthInterceptor;
 import omq.common.model.Account;
 import omq.login.LoginService;
+import omq.my.friend.FriendInterceptor;
 import omq.my.like.LikeInterceptor;
 
-@Before({LikeInterceptor.class})
+@Before({LikeInterceptor.class,FriendInterceptor.class,FrontAuthInterceptor.class})
 public class MySettingController extends BaseController{
 	
 	public static final MySettingService srv = new MySettingService().me;

@@ -1,18 +1,21 @@
 package omq.my.newsfeed;
 
 import com.jfinal.aop.Before;
+import com.jfinal.core.ActionKey;
 import com.jfinal.plugin.activerecord.Page;
 
 import omq.common.controller.BaseController;
+import omq.common.interceptor.FrontAuthInterceptor;
 import omq.common.model.NewsFeed;
+import omq.my.friend.FriendInterceptor;
 import omq.my.like.LikeInterceptor;
 
-@Before({LikeInterceptor.class})
+@Before({LikeInterceptor.class,FriendInterceptor.class,FrontAuthInterceptor.class})
 public class NewsFeedController extends BaseController{
 	
 	static NewsFeedService srv = NewsFeedService.me;
 
-	//@ActionKey("/my")
+	@ActionKey("/my")
 	public void newsFeed() {
 		Page<NewsFeed> newsFeedPage = srv.paginate(getLoginAccountId(), getParaToInt("p", 1));
 		setAttr("newsFeedPage", newsFeedPage);

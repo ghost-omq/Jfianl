@@ -26,7 +26,7 @@ public class ConfigRoute extends Routes{
 		add("/share",ShareController.class);
 		add("/feedback",FeedbackController.class);
 		
-		add("/my",NewsFeedController.class,"/my/newsfeed");
+		//add("/my",NewsFeedController.class,"/my/newsfeed");
 		add("/my/favorite",FavoriteController.class);
 		add("/my/setting", MySettingController.class);
 		add("/my/share", MyShareController.class);

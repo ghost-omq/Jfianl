@@ -23,7 +23,7 @@ public class BaseController extends Controller{
 		return getLoginAccount() != null;
 	}
 	
-	public boolean noLogin(){
+	public boolean notLogin(){
 		return !isLogin();
 	}
 	
