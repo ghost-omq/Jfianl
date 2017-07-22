@@ -68,6 +68,11 @@ public class AccountService {
         }
     }
 	
+	public Account getUsefulById(int accountId) {
+        Account account = getById(accountId);
+        return account.isStatusOk() ? account : null;
+	}
+	
 	public void addLikeCount(int accountId) {
         updateLikeCount(accountId, true);
     }

@@ -15,6 +15,10 @@ import omq.my.share.MyShareController;
 import omq.project.ProjectController;
 import omq.reg.RegController;
 import omq.share.ShareController;
+import omq.user.feedback.UserFeedbackController;
+import omq.user.newsfeed.UserNewsFeedController;
+import omq.user.project.UserProjectController;
+import omq.user.share.UserShareController;
 
 public class ConfigRoute extends Routes{
 
@@ -35,6 +39,11 @@ public class ConfigRoute extends Routes{
 		add("/my/newsfeed", NewsFeedController.class);
 		add("/my/message", MessageController.class);
 		//add("/my/setting/password", MySettingController.class);
+		
+		add("/user", UserNewsFeedController.class,"/user/newsfeed");
+		add("/user/feedback", UserFeedbackController.class);
+		add("/user/project", UserProjectController.class);
+		add("/user/share", UserShareController.class);
 		
 		
 		add("/reg",RegController.class);
