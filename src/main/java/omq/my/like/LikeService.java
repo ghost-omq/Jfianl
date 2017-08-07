@@ -62,7 +62,6 @@ public class LikeService {
         if (myId == userId) {
             return Ret.fail("msg", "不能给自己点赞");
         }
-        // 如果已经点过赞，则直接退出
         if (isLike(myId, refType, refId)) {
             return Ret.fail("msg", "已经点赞，请刷新页面");
         }
@@ -80,15 +79,11 @@ public class LikeService {
             }
         });
         if (isOk) {
-            // 向被赞的人发送私信，鼓励创造更多资源
             LikeMessageLogService.me.sendSystemMessage(myId, userId, refType, refId);
         }
         return isOk ? Ret.ok() : Ret.fail("msg", "点赞失败");
     }
 
-    /**
-     * 取消点赞
-     */
     private Ret delete(final int myId, final String refType, final int refId) {
         boolean isOk = Db.tx(new IAtom() {
             public boolean run() throws SQLException {

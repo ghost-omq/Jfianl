@@ -2,6 +2,7 @@ package omq.common.account;
 
 import java.util.List;
 
+import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Model;
 import com.jfinal.plugin.ehcache.CacheKit;
@@ -24,6 +25,13 @@ public class AccountService {
 				join(joinOnField, m, joinAttrs);
 			}
 		}
+	}
+	
+	public Account getByNickName(String nickName, String columns) {
+		if (StrKit.isBlank(nickName)) {
+			return null;
+		}
+		return dao.findFirst("select " + columns +" from account where nickName=?  and status=?  limit 1", nickName, Account.STATUS_OK);
 	}
 	
 	public void join(String joinOnField, Model model, String... joinAttrs) {

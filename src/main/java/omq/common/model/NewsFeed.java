@@ -7,5 +7,36 @@ import omq.common.model.base.BaseNewsFeed;
  */
 @SuppressWarnings("serial")
 public class NewsFeed extends BaseNewsFeed<NewsFeed> {
-	
+	public static final int REF_TYPE_PROJECT = 1;
+	public static final int REF_TYPE_PROJECT_REPLY = 2;
+
+	public static final int REF_TYPE_SHARE = 3;
+	public static final int REF_TYPE_SHARE_REPLY = 4;
+
+	public static final int REF_TYPE_FEEDBACK = 5;
+	public static final int REF_TYPE_FEEDBACK_REPLY = 6;
+
+	public boolean isRefTypeProject() {
+		return getRefType() == REF_TYPE_PROJECT;
+	}
+
+	public boolean isRefTypeProjectReply() {
+		return getRefType() == REF_TYPE_PROJECT_REPLY;
+	}
+
+	public boolean isRefTypeShare() {
+		return getRefType() == REF_TYPE_SHARE;
+	}
+
+	public boolean isRefTypeShareReply() {
+		return getRefType() == REF_TYPE_SHARE_REPLY;
+	}
+
+	public boolean isRefTypeFeedback() {
+		return getRefType() == REF_TYPE_FEEDBACK;
+	}
+
+	public boolean isRefTypeFeedbackReply() {
+		return getRefType() == REF_TYPE_FEEDBACK_REPLY;
+	}
 }

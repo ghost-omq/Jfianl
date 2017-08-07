@@ -14,8 +14,8 @@ public class LikeController extends BaseController{
 			return;
 		}
 		
-		Ret ret = srv.like(getLoginAccountId(), getPara("refType"), getParaToInt("refId"), getParaToBoolean("isAdd")));
-		renderJson(ret);
+		Ret ret = srv.like(getLoginAccountId(), getPara("refType"), getParaToInt("refId"), getParaToBoolean("isAdd"));
+        renderJson(ret);
 	}
 
 }

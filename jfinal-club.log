@@ -1,16 +1,10 @@
 
-2017-07-22 11:23:36
-[ERROR]-[Thread: qtp525571-32]-[com.jfinal.core.ActionHandler.handle()]: /user
-java.lang.NullPointerException
-	at omq.user.UserNewsFeedController.newsfeed(UserNewsFeedController.java:17)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
-	at omq.common.interceptor.LoginSessionInterceptor.intercept(LoginSessionInterceptor.java:34)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+2017-08-01 09:33:34
+[ERROR]-[Thread: qtp525571-33]-[com.jfinal.core.ActionHandler.handle()]: /user/1
+com.jfinal.render.RenderException: com.jfinal.template.TemplateException: "user" can not be null for accessed by "user.nickName"
+Template: "/view/user/newsfeed/index.html". Line: 1
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:63)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
 	at omq.common.handler.UrlSeoHandler.handle(UrlSeoHandler.java:55)
 	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
 	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
@@ -36,19 +30,26 @@ java.lang.NullPointerException
 	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
 	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.jfinal.template.TemplateException: "user" can not be null for accessed by "user.nickName"
+Template: "/view/user/newsfeed/index.html". Line: 1
+	at com.jfinal.template.expr.ast.Field.eval(Field.java:62)
+	at com.jfinal.template.expr.ast.Arith.doEval(Arith.java:70)
+	at com.jfinal.template.expr.ast.Arith.eval(Arith.java:61)
+	at com.jfinal.template.expr.ast.Assign.assignVariable(Assign.java:85)
+	at com.jfinal.template.expr.ast.Assign.eval(Assign.java:78)
+	at com.jfinal.template.expr.ast.ExprList.eval(ExprList.java:67)
+	at com.jfinal.template.stat.ast.Set.exec(Set.java:56)
+	at com.jfinal.template.stat.ast.StatList.exec(StatList.java:48)
+	at com.jfinal.template.Template.render(Template.java:49)
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:61)
+	... 26 more
 
-2017-07-22 16:29:26
-[ERROR]-[Thread: qtp525571-29]-[com.jfinal.core.ActionHandler.handle()]: /user
-java.lang.NullPointerException
-	at omq.user.newsfeed.UserNewsFeedController.newsfeed(UserNewsFeedController.java:17)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
-	at omq.common.interceptor.LoginSessionInterceptor.intercept(LoginSessionInterceptor.java:34)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+2017-08-01 09:33:38
+[ERROR]-[Thread: qtp525571-32]-[com.jfinal.core.ActionHandler.handle()]: /project/detail/1
+com.jfinal.render.RenderException: com.jfinal.template.TemplateException: "ret" can not be null for accessed by "ret.isFavoriteActive"
+Template: "/view/project/detail.html". Line: 26
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:63)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
 	at omq.common.handler.UrlSeoHandler.handle(UrlSeoHandler.java:55)
 	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
 	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
@@ -74,19 +75,28 @@ java.lang.NullPointerException
 	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
 	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.jfinal.template.TemplateException: "ret" can not be null for accessed by "ret.isFavoriteActive"
+Template: "/view/project/detail.html". Line: 26
+	at com.jfinal.template.expr.ast.Field.eval(Field.java:62)
+	at com.jfinal.template.expr.ast.ExprList.eval(ExprList.java:67)
+	at com.jfinal.template.stat.ast.Output.exec(Output.java:46)
+	at com.jfinal.template.stat.ast.StatList.exec(StatList.java:48)
+	at com.jfinal.template.stat.ast.Define.call(Define.java:105)
+	at com.jfinal.template.stat.ast.Call.exec(Call.java:49)
+	at com.jfinal.template.stat.ast.StatList.exec(StatList.java:48)
+	at com.jfinal.template.stat.ast.Define.call(Define.java:105)
+	at com.jfinal.template.stat.ast.Call.exec(Call.java:49)
+	at com.jfinal.template.stat.ast.StatList.exec(StatList.java:48)
+	at com.jfinal.template.Template.render(Template.java:49)
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:61)
+	... 26 more
 
-2017-07-22 16:30:23
-[ERROR]-[Thread: qtp525571-31]-[com.jfinal.core.ActionHandler.handle()]: /user
-java.lang.NullPointerException
-	at omq.user.newsfeed.UserNewsFeedController.newsfeed(UserNewsFeedController.java:17)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:498)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:73)
-	at omq.common.interceptor.LoginSessionInterceptor.intercept(LoginSessionInterceptor.java:34)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
+2017-08-01 09:34:12
+[ERROR]-[Thread: qtp525571-31]-[com.jfinal.core.ActionHandler.handle()]: /user/1
+com.jfinal.render.RenderException: com.jfinal.template.TemplateException: "user" can not be null for accessed by "user.nickName"
+Template: "/view/user/newsfeed/index.html". Line: 1
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:63)
+	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:99)
 	at omq.common.handler.UrlSeoHandler.handle(UrlSeoHandler.java:55)
 	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
 	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
@@ -112,71 +122,16 @@ java.lang.NullPointerException
 	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
 	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
 	at java.lang.Thread.run(Thread.java:748)
-
-2017-07-22 16:30:30
-[ERROR]-[Thread: qtp525571-31]-[com.jfinal.core.ActionHandler.handle()]: /user/share
-java.lang.NullPointerException
-	at omq.user.common.UserSpaceInterceptor.intercept(UserSpaceInterceptor.java:15)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at omq.common.interceptor.LoginSessionInterceptor.intercept(LoginSessionInterceptor.java:34)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
-	at omq.common.handler.UrlSeoHandler.handle(UrlSeoHandler.java:55)
-	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
-	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
-	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
-	at org.eclipse.jetty.server.Server.handle(Server.java:365)
-	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
-	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
-	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
-	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
-	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
-	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
-	at java.lang.Thread.run(Thread.java:748)
-
-2017-07-22 16:31:32
-[ERROR]-[Thread: qtp525571-33]-[com.jfinal.core.ActionHandler.handle()]: /user/share
-java.lang.NullPointerException
-	at omq.user.common.UserSpaceInterceptor.intercept(UserSpaceInterceptor.java:15)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at omq.common.interceptor.LoginSessionInterceptor.intercept(LoginSessionInterceptor.java:34)
-	at com.jfinal.aop.Invocation.invoke(Invocation.java:67)
-	at com.jfinal.core.ActionHandler.handle(ActionHandler.java:74)
-	at omq.common.handler.UrlSeoHandler.handle(UrlSeoHandler.java:55)
-	at com.jfinal.core.JFinalFilter.doFilter(JFinalFilter.java:74)
-	at org.eclipse.jetty.servlet.ServletHandler$CachedChain.doFilter(ServletHandler.java:1307)
-	at org.eclipse.jetty.servlet.ServletHandler.doHandle(ServletHandler.java:453)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:137)
-	at org.eclipse.jetty.security.SecurityHandler.handle(SecurityHandler.java:560)
-	at org.eclipse.jetty.server.session.SessionHandler.doHandle(SessionHandler.java:231)
-	at org.eclipse.jetty.server.handler.ContextHandler.doHandle(ContextHandler.java:1072)
-	at org.eclipse.jetty.servlet.ServletHandler.doScope(ServletHandler.java:382)
-	at org.eclipse.jetty.server.session.SessionHandler.doScope(SessionHandler.java:193)
-	at org.eclipse.jetty.server.handler.ContextHandler.doScope(ContextHandler.java:1006)
-	at org.eclipse.jetty.server.handler.ScopedHandler.handle(ScopedHandler.java:135)
-	at org.eclipse.jetty.server.handler.HandlerWrapper.handle(HandlerWrapper.java:116)
-	at org.eclipse.jetty.server.Server.handle(Server.java:365)
-	at org.eclipse.jetty.server.AbstractHttpConnection.handleRequest(AbstractHttpConnection.java:485)
-	at org.eclipse.jetty.server.AbstractHttpConnection.headerComplete(AbstractHttpConnection.java:926)
-	at org.eclipse.jetty.server.AbstractHttpConnection$RequestHandler.headerComplete(AbstractHttpConnection.java:988)
-	at org.eclipse.jetty.http.HttpParser.parseNext(HttpParser.java:635)
-	at org.eclipse.jetty.http.HttpParser.parseAvailable(HttpParser.java:235)
-	at org.eclipse.jetty.server.AsyncHttpConnection.handle(AsyncHttpConnection.java:82)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint.handle(SelectChannelEndPoint.java:628)
-	at org.eclipse.jetty.io.nio.SelectChannelEndPoint$1.run(SelectChannelEndPoint.java:52)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool.runJob(QueuedThreadPool.java:608)
-	at org.eclipse.jetty.util.thread.QueuedThreadPool$3.run(QueuedThreadPool.java:543)
-	at java.lang.Thread.run(Thread.java:748)
+Caused by: com.jfinal.template.TemplateException: "user" can not be null for accessed by "user.nickName"
+Template: "/view/user/newsfeed/index.html". Line: 1
+	at com.jfinal.template.expr.ast.Field.eval(Field.java:62)
+	at com.jfinal.template.expr.ast.Arith.doEval(Arith.java:70)
+	at com.jfinal.template.expr.ast.Arith.eval(Arith.java:61)
+	at com.jfinal.template.expr.ast.Assign.assignVariable(Assign.java:85)
+	at com.jfinal.template.expr.ast.Assign.eval(Assign.java:78)
+	at com.jfinal.template.expr.ast.ExprList.eval(ExprList.java:67)
+	at com.jfinal.template.stat.ast.Set.exec(Set.java:56)
+	at com.jfinal.template.stat.ast.StatList.exec(StatList.java:48)
+	at com.jfinal.template.Template.render(Template.java:49)
+	at com.jfinal.render.TemplateRender.render(TemplateRender.java:61)
+	... 26 more

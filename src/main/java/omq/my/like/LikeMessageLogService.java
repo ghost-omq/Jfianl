@@ -8,7 +8,13 @@ import com.jfinal.kit.LogKit;
 import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Record;
 
+import omq.common.account.AccountService;
+import omq.common.model.Account;
+import omq.my.message.MessageService;
+
 public class LikeMessageLogService {
+	
+	static final LikeMessageLogService me = new LikeMessageLogService();
 	
 	public static final int REF_TYPE_PROJECT = 1;
     public static final int REF_TYPE_SHARE = 3;
@@ -42,6 +48,7 @@ public class LikeMessageLogService {
             LogKit.error(e.getMessage(), e);
         }
     }
+
 	
 	private Integer getRefTypeValue(String tableName) {
         Integer refType = map.get(tableName);
@@ -50,4 +57,26 @@ public class LikeMessageLogService {
         }
         return refType;
     }
+	
+	private void saveSystemMessage(int myId, int userId, String tableName, int refType, int refId) {
+        Record ref = Db.findFirst("select id, title, likeCount from " + tableName + " where id=? limit 1", refId);
+        if (ref == null) {
+            return ;
+        }
+
+        Account my = AccountService.me.getById(myId);
+        String msg = "@" + my.getNickName() + " 刚刚赞了你的";
+        if (refType == REF_TYPE_PROJECT) {
+            msg = msg + "项目：<a href='/project/" + ref.getInt("id") +"' target='_blank'>" + ref.getStr("title");
+        } else if (refType == REF_TYPE_SHARE) {
+            msg = msg + "分享：<a href='/share/" + ref.getInt("id") +"' target='_blank'>" + ref.getStr("title");
+        } else if (refType == REF_TYPE_FEEDBACK) {
+            msg = msg + "反馈：<a href='/feedback/" + ref.getInt("id") +"' target='_blank'>" + ref.getStr("title");
+        } else {
+            throw new RuntimeException("refType 不正确，请告知管理员");
+        }
+        msg = msg + "</a>，目前被赞次数为：" + ref.getInt("likeCount");
+        MessageService.me.sendSystemMessage(myId, userId, msg);
+    }
+	
 }

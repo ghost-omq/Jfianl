@@ -7,6 +7,7 @@ import omq.index.IndexController;
 import omq.login.LoginController;
 import omq.my.favorite.FavoriteController;
 import omq.my.feedback.MyFeedbackController;
+import omq.my.friend.FriendController;
 import omq.my.message.MessageController;
 import omq.my.newsfeed.NewsFeedController;
 import omq.my.project.MyProjectController;
@@ -31,6 +32,7 @@ public class ConfigRoute extends Routes{
 		add("/feedback",FeedbackController.class);
 		
 		//add("/my",NewsFeedController.class,"/my/newsfeed");
+		add("/my/friend",FriendController.class);
 		add("/my/favorite",FavoriteController.class);
 		add("/my/setting", MySettingController.class);
 		add("/my/share", MyShareController.class);

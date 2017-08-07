@@ -12,11 +12,12 @@ public class UserNewsFeedController extends BaseController{
 	
 	@ActionKey("/user")
 	public void newsfeed(){
-		Integer paraToInt = getParaToInt("id");
+		Integer paraToInt = getParaToInt();
 		Integer paraToInt2 = getParaToInt("p", 1);
 		Page<NewsFeed> newsFeedPage = srv.paginateForUserSpace(paraToInt, paraToInt2);
 		setAttr("newsFeedPage", newsFeedPage);
         setAttr("paginateLink", "/user/" + getParaToInt() + "?p=");
+        render("index.html");
 	}
 
 	
